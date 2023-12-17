@@ -3,6 +3,8 @@ const DISPLAY_SIZE = {
 	y: 500
 }
 
+const TILE_SIZE = 50;
+
 
 function draw_particle(display, x, y, radius, color)
 {
@@ -13,33 +15,44 @@ function draw_particle(display, x, y, radius, color)
 	display.fill();
 }
 
-function simulate()
+function render(display, particles)
 {
+
+}
+
+function simulate(event, display)
+{
+	event.preventDefault();
+
 	var demension = document.getElementById('particles_amount').value
+	const particles = [];
 	var particles_amount = Math.pow(demension, demension);
 	var counter = 0;
-	const particles = [];
 
 	for (let y = 0; y < demension; y++)
 	{
 		particles.push([])
+
 		for (let x = 0; x < demension; x++)
 		{
-			
+			particles[y].push(true);
 		}
 	}
 
-	while (counter < particles_amount)
-	{
+	console.log(particles)
+	
+	// while (counter < particles_amount)
+	// {
 		
-	}
+	// }
 }
 
 function main()
 {
 	var canva = document.getElementById('display');
 	var display = canva.getContext('2d');
-
+	
+	document.getElementById('start').addEventListener('click', simulate, [display, ]);
 
 }
 
