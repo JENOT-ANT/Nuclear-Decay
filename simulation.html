@@ -5,19 +5,30 @@
 	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<canvas id="display" width="500" height="500">
-		We can't draw in your browser version :/
-	</canvas>
-	
-	<form>
-		<input type="range" id="particles_amount" name="Amount of Particles" min="10" max="24">
-		<label for="particles_amount">Amount of Particles</label>
+	<div style="display: flex;">
+		<canvas id="display" width="500" height="500">
+			We can't draw in your browser version :/
+		</canvas>
 		
-		<input type="submit" id="start" value="Start">
-	</form>
+		<form>
+			<label for="particles_amount">Amount of Particles:</label>
+			<input type="range" id="demension" name="Amount of Particles" min="10" max="24">
+			<input class="display" type="text" id="particles_amount" size="3" disabled>
+
+			<br><br><br><br><br>
+			<input type="button" id="start" value="Start">
+			<br>
+			<input type="button" id="reset" value="Reset">
+		</form>
+
+		<canvas id="display2" width="500" height="500">
+			We can't draw in your browser version :/
+		</canvas>
+	</div>
+	
 
 	<hr>
-	<p>Page under construction.</p>
+	<p style="text-align: center;"><b>Retired 2B Dev-Team</b></p>
 
 	<script src="engine.js"></script>
 </body>

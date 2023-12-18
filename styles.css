@@ -1,5 +1,23 @@
+.display
+{
+    text-align: center;
+}
+
 canvas
 {
     border: 2px solid gray;
+    border-radius: 5px;
+    box-shadow: 0 0 0 3px skyblue;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    
+    margin: 1vmin;
+    padding: 1vmin;
+
+    border: 1px solid gray;
     border-radius: 5px;
 }
