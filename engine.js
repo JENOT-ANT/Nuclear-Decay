@@ -13,17 +13,13 @@ function draw_particle(display, x, y, radius, color) {
 	display.fill();
 }
 
-function render(display, demension, particles) {
+function render_material(display) {
+	var demension = document.getElementById('particles_amount').value
 	display.clearRect(0, 0, DISPLAY_SIZE.x, DISPLAY_SIZE.y);
 
 	for (let y = 0; y < demension; y++) {
 		for (let x = 0; x < demension; x++) {
-			if (particles[y][x] == true) {
-				draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, Math.round(TILE_SIZE / 4), '#00F0FF');
-			}
-			else {
-				draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, Math.round(TILE_SIZE / 4), '#FF0000');
-			}
+			draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, '#00F0FF');
 		}
 	}
 }
@@ -43,7 +39,7 @@ function simulate(display) {
 	function main_loop(counter) {
 		for (let y = 0; y < demension; y++) {
 			for (let x = 0; x < demension; x++) {
-				if (particles[y][x] == true && Math.random() > 0.999) {
+				if (particles[y][x] == true && Math.random() > 0.5) {
 					particles[y][x] = false;
 					draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, '#FF0000');
 					// render(display, demension, particles);
@@ -71,14 +67,16 @@ function main() {
 	var canva = document.getElementById('display');
 	var display = canva.getContext('2d');
 
+	render_material(display);
+
 	document.getElementById('start').addEventListener('click', function (event) {
 		event.preventDefault();
 		simulate(display);
 	});
 
-	// document.getElementById('particles_amount').addEventListener('change', function (event) {
-	//	 render(display);
-	// });
+	document.getElementById('particles_amount').addEventListener('change', function (event) {
+		 render_material(display);
+	});
 
 }
 
