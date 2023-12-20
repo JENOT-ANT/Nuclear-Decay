@@ -10,23 +10,32 @@
 			We can't draw in your browser version :/
 		</canvas>
 		
-		<form>
-			<label for="particles_amount">Amount of Particles:</label>
+		<form class="c_flexed">
+			<label for="demension">Amount of Particles:</label>
 			<input type="range" id="demension" name="Amount of Particles" min="10" max="24">
 			<input class="display" type="text" id="particles_amount" size="3" disabled>
+			
+			<br>
+			
+			<label for="propability">Decay Propability:</label>
+			<input type="range" id="propability" name="Amount of Particles" min="0.001" max="0.009" step="0.001">
+			<input class="display2" type="text" id="particles_amount" size="3" disabled>
 
 			<br><br><br><br><br>
+			
 			<input type="button" id="start" value="Start">
 			<br>
 			<input type="button" id="reset" value="Reset">
 		</form>
-
-		<canvas id="display2" width="500" height="500">
-			We can't draw in your browser version :/
-		</canvas>
+		
+		<div class="c_flexed">
+			<h2>Diagram N(t):</h2>
+			<canvas id="diagram" width="500" height="300">
+				We can't draw in your browser version :/
+			</canvas>
+		</div>
 	</div>
 	
-
 	<hr>
 	<p style="text-align: center;"><b>Retired 2B Dev-Team</b></p>
 

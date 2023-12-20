@@ -1,13 +1,22 @@
 const GLOBALS = {
 	running: false,
-	pause: false,
+	pause: false
 }
 const DISPLAY_SIZE = {
 	x: 500,
 	y: 500
 }
+const DIAGRAM_SIZE = {
+	x: 500,
+	y: 300
+}
+const DIAGRAM_MARGIN = {
+	x: 1,
+	y: 1
+}
+
 const TILE_SIZE = 20;
-const RADIUS = 9;
+const RADIUS = Math.round(TILE_SIZE / 2) - 1;
 
 function draw_particle(display, x, y, radius, color) {
 	display.beginPath();
@@ -17,9 +26,10 @@ function draw_particle(display, x, y, radius, color) {
 	display.fill();
 }
 
-function render_material(display) {
+function reset(display, diagram) {
 	var demension = document.getElementById('demension').value
 	display.clearRect(0, 0, DISPLAY_SIZE.x, DISPLAY_SIZE.y);
+	diagram.clearRect(0, 0, DISPLAY_SIZE.x, DISPLAY_SIZE.y);
 
 	for (let y = 0; y < demension; y++) {
 		for (let x = 0; x < demension; x++) {
@@ -28,9 +38,10 @@ function render_material(display) {
 	}
 }
 
-function simulate(display) {
+function simulate(display, diagram) {
 	var demension = document.getElementById('demension').value
 	var particles_amount = Math.pow(demension, 2);
+	var diagram_scale = (DIAGRAM_SIZE.y - DIAGRAM_MARGIN.y) * 0.75 / (particles_amount);
 	const particles = [];
 
 	GLOBALS.running = true;
@@ -44,23 +55,27 @@ function simulate(display) {
 		}
 	}
 
-	function main_loop(counter) {
+	function main_loop(decay_counter, time_counter) {
 		for (let y = 0; y < demension; y++) {
 			for (let x = 0; x < demension; x++) {
-				if (particles[y][x] == true && Math.random() > 0.99) {
+				if (particles[y][x] == true && Math.random() < 0.005) {
 					particles[y][x] = false;
 					draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, '#FF0000');
-					counter++;
+					decay_counter++;
 				}
 			}
 		}
-
-		if (GLOBALS.pause == true) {
-			// do nothing
+		if (time_counter % 2 == 0) {
+			let x = Math.round(time_counter / 2) + DIAGRAM_MARGIN.x;
+			let y = Math.round(DIAGRAM_SIZE.y - DIAGRAM_MARGIN.y) - Math.round((particles_amount - decay_counter) * diagram_scale);
+			
+			diagram.fillRect(x, y, 2, 2);
 		}
-		else if (counter < particles_amount && GLOBALS.running == true) {
+		
+		if (decay_counter < particles_amount && GLOBALS.running == true) {
+			
 			requestAnimationFrame(() => {
-				main_loop(counter);
+				main_loop(decay_counter, time_counter + 1);
 			});
 		}
 		else {
@@ -71,7 +86,7 @@ function simulate(display) {
 		}
 	}
 
-	main_loop(0);
+	main_loop(0, 0);
 
 }
 
@@ -79,24 +94,25 @@ function simulate(display) {
 function main() {
 	var canva = document.getElementById('display');
 	var display = canva.getContext('2d');
+	var diagram = document.getElementById('diagram').getContext('2d');
 
 	document.getElementById('particles_amount').value = Math.pow(document.getElementById('demension').value, 2);
 
-	render_material(display);
+	reset(display, diagram);
 
 	document.getElementById('start').addEventListener('click', function (event) {
 		event.preventDefault();
-		simulate(display);
+		simulate(display, diagram);
 	});
 	
 	document.getElementById('reset').addEventListener('click', function (event) {
 		GLOBALS.running = false;
-		setTimeout(render_material, 50, display);
+		setTimeout(reset, 50, display, diagram);
 	});
 
 	document.getElementById('demension').addEventListener('change', function (event) {
 		document.getElementById('particles_amount').value = Math.pow(document.getElementById('demension').value, 2);
-		render_material(display);
+		reset(display, diagram);
 	});
 
 }
