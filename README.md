@@ -3,4 +3,4 @@ Interactive simulation of radioactive (nuclear) decay process powered by JavaScr
 
 ----------
 
-# [ [START](https://retired-2b-dev-team.github.io/Nuclear-Decay/simulation.html) ]
+# [ [`START`](https://retired-2b-dev-team.github.io/Nuclear-Decay/simulation.html) ]
