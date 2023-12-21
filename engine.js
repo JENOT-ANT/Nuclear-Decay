@@ -7,16 +7,21 @@ const DISPLAY_SIZE = {
 	y: 500
 }
 const DIAGRAM_SIZE = {
-	x: 500,
+	x: 400,
 	y: 300
 }
 const DIAGRAM_MARGIN = {
 	x: 1,
 	y: 1
 }
+const COLORS = {
+	// active: 'rgb(114, 233, 200)',
+	active: 'rgb(81, 213, 157)',
+	decayed: 'rgb(75, 138, 140)',
+}
 
 const TILE_SIZE = 20;
-const RADIUS = Math.round(TILE_SIZE / 2) - 1;
+const RADIUS = Math.round(TILE_SIZE / 2) - 2;
 
 function draw_particle(display, x, y, radius, color) {
 	display.beginPath();
@@ -33,7 +38,7 @@ function reset(display, diagram) {
 
 	for (let y = 0; y < demension; y++) {
 		for (let x = 0; x < demension; x++) {
-			draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, '#00F0FF');
+			draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, COLORS.active);
 		}
 	}
 }
@@ -60,7 +65,7 @@ function simulate(display, diagram) {
 			for (let x = 0; x < demension; x++) {
 				if (particles[y][x] == true && Math.random() < 0.005) {
 					particles[y][x] = false;
-					draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, '#FF0000');
+					draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, COLORS.decayed);
 					decay_counter++;
 				}
 			}
