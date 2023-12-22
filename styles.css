@@ -3,7 +3,7 @@ body
     font-family: Arial, Helvetica, sans-serif;
     background-color: #159957;
     background-image: linear-gradient(120deg, #155799, #159957);
-    color: #ffffff;
+    color: rgb(255, 255, 255, 0.95);
 }
 
 .c_flexed
@@ -12,6 +12,7 @@ body
     flex-direction: column;
     text-align: center;
     justify-content: space-evenly;
+    
 }
 
 .display
@@ -19,34 +20,30 @@ body
     text-align: center;
 }
 
-canvas
+form, .c_flexed, canvas
 {
+    transition: all ease-in-out 0.1s;
     margin: 5px;
     padding: 5px;
     
-    border: 2px solid;
+    background-color: rgb(255, 255, 255, 0.05);
+    border: 1px solid rgb(255, 255, 255, 0.75);
     border-radius: 5px;
-
-    /* box-shadow: 0 0 0 2px royalblue; */
-    opacity: 0.90;
 }
 
-form
+form:hover, .c_flexed:hover, canvas:hover
 {
-    margin: 5px;
-    padding: 5px;
-
-    border: 2px solid;
-    border-radius: 5px;
-
+    background-color: rgb(255, 255, 255, 0.08);
+    border: 1px solid rgb(255, 255, 255, 0.78);
 }
-
 
 input, a
 {
-    color: rgb(255, 255, 255, 0.8);
-    background-color: rgb(255, 255, 255, 0.08);
-    border: 1px solid rgb(255, 255, 255, 0.2);
+    transition: all ease-in-out 0.2s;
+    
+    color: rgb(255, 255, 255, 0.85);
+    background-color: rgb(255, 255, 255, 0.18);
+    border: 1px solid rgb(255, 255, 255, 0.3);
     
     border-radius: 5px;
     
@@ -56,11 +53,16 @@ input, a
     font-size: 0.9rem;
 }
 
-input[type=button]:hover, a:hover
+input:hover, a:hover
 {
-    color: rgb(255, 255, 255, 0.9);
-    background-color: rgb(255, 255, 255, 0.2);
-    border-color: rgb(255, 255, 255, 0.3);
+    color: rgb(255, 255, 255, 1);
+    background-color: rgb(255, 255, 255, 0.28);
+    border-color: rgb(255, 255, 255, 0.4);
+}
+
+input[type='range']
+{
+    accent-color: lightgray;
 }
 
 a

@@ -17,7 +17,7 @@ const DIAGRAM_MARGIN = {
 const COLORS = {
 	// active: 'rgb(114, 233, 200)',
 	active: 'rgb(81, 213, 157)',
-	decayed: 'rgb(75, 138, 140)',
+	decayed: 'rgb(95, 138, 140)',
 }
 
 const TILE_SIZE = 20;
@@ -63,15 +63,15 @@ function simulate(display, diagram) {
 	function main_loop(decay_counter, time_counter) {
 		for (let y = 0; y < demension; y++) {
 			for (let x = 0; x < demension; x++) {
-				if (particles[y][x] == true && Math.random() < 0.005) {
+				if (particles[y][x] == true && Math.random() < 0.001) {
 					particles[y][x] = false;
 					draw_particle(display, (x + 1) * TILE_SIZE, (y + 1) * TILE_SIZE, RADIUS, COLORS.decayed);
 					decay_counter++;
 				}
 			}
 		}
-		if (time_counter % 2 == 0) {
-			let x = Math.round(time_counter / 2) + DIAGRAM_MARGIN.x;
+		if (time_counter % 8 == 0) {
+			let x = Math.round(time_counter / 8) + DIAGRAM_MARGIN.x;
 			let y = Math.round(DIAGRAM_SIZE.y - DIAGRAM_MARGIN.y) - Math.round((particles_amount - decay_counter) * diagram_scale);
 			
 			diagram.fillRect(x, y, 2, 2);
